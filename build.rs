@@ -57,6 +57,10 @@ fn build_opus(is_static: bool) {
         }
     }
 
+    if let Ok(toolchain_file) = env::var("CMAKE_TOOLCHAIN_FILE") {
+        cmake_config.define("CMAKE_TOOLCHAIN_FILE", toolchain_file);
+    }
+
     if let Ok(value) = env::var("CMAKE_OSX_SYSROOT") {
         cmake_config.configure_arg(format!("-DCMAKE_OSX_SYSROOT={value}"));
     }
